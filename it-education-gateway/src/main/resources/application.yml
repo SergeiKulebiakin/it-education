@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: static
+          uri: http://localhost:3000
+          predicates:
+            - Path=/static/**,/
+#        - id: webapp
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/app/**
+#          filters:
+#            - RewritePath=/app/(?<segment>.*), /${segment}
+#            - UserHeaderFilter
+#            - GameServerRoutingFilter=http://localhost:8081
+
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: 680247178123-8nb9b2ssk22hg15daet9lc7isbddiuvu.apps.googleusercontent.com
+#            client-secret: aZ7DQ7-P1ImLnopPWwgZpiwY

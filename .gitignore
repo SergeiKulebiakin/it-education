@@ -1,0 +1,29 @@
+# Project exclude paths
+/it-education-commons/target/
+/it-education-gateway/target/
+/it-education-userservice/target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+# dependencies
+/it-education-front/node_modules
+/it-education-front/.pnp
+.pnp.js
+
+# testing
+/it-education-front/coverage
+
+# production
+/it-education-front/build
+
+# misc
+/it-education-front/.DS_Store
+/it-education-front/.env.local
+/it-education-front/.env.development.local
+/it-education-front/.env.test.local
+/it-education-front/.env.production.local
+/it-education-front/npm-debug.log*
