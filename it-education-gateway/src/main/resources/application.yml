@@ -11,14 +11,14 @@ application:
       secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize
       expiration: 28800
 
-#spring:
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: static
-#          uri: http://localhost:3000
-#          predicates:
-#            - Path=/static/**,/
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: static
+          uri: http://localhost:3000
+          predicates:
+            - Path=/static/**,/
 #        - id: webapp
 #          uri: http://localhost:8081
 #          predicates:

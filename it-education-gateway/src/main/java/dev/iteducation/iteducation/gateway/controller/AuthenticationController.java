@@ -31,7 +31,7 @@ public class AuthenticationController {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public Mono<ResponseEntity<?>> login(@RequestBody AuthRequest ar) {
 		return userAccountService.findByEmail(ar.getEmail()).map((userDetails) -> {
 			if (passwordEncoder.encode(ar.getPassword()).equals(userDetails.getPassword())) {

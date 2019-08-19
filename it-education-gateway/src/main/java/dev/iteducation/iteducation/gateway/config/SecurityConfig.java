@@ -53,7 +53,7 @@ public class SecurityConfig {
 				.securityContextRepository(securityContextRepository)
 				.authorizeExchange()
 				.pathMatchers(HttpMethod.OPTIONS).permitAll()
-				.pathMatchers("/login", "/actuator").permitAll()
+				.pathMatchers("/auth", "/actuator", "/", "/static/**").permitAll()
 				.anyExchange().authenticated()
 				.and().build();
 	}
