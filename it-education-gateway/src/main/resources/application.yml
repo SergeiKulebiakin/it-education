@@ -1,14 +1,24 @@
 server:
   port: 8080
 
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: static
-          uri: http://localhost:3000
-          predicates:
-            - Path=/static/**,/
+application:
+  password:
+    encoder:
+      secret: iteducation
+      iteration: 33
+      keylength: 256
+    jwt:
+      secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize
+      expiration: 28800
+
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: static
+#          uri: http://localhost:3000
+#          predicates:
+#            - Path=/static/**,/
 #        - id: webapp
 #          uri: http://localhost:8081
 #          predicates:
