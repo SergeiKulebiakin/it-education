@@ -27,3 +27,6 @@
 /it-education-front/.env.test.local
 /it-education-front/.env.production.local
 /it-education-front/npm-debug.log*
+
+# passwords
+/it-education-mail-service/src/main/resources/application-mail.yml
