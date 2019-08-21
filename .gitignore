@@ -2,6 +2,7 @@
 /it-education-commons/target/
 /it-education-gateway/target/
 /it-education-userservice/target/
+/it-education-mail-service/target/
 
 ### IntelliJ IDEA ###
 .idea
