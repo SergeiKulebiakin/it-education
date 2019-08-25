@@ -23,6 +23,10 @@ public class UserAccount implements UserDetails {
 
 	@Getter
 	@Setter
+	private String id;
+
+	@Getter
+	@Setter
 	private String email;
 
 	@Setter
@@ -37,7 +41,8 @@ public class UserAccount implements UserDetails {
 	@Getter
 	private List<UserRole> roles;
 
-	public UserAccount(String email, String username, String password, Boolean enabled, List<UserRole> roles) {
+	public UserAccount(String id, String email, String username, String password, Boolean enabled, List<UserRole> roles) {
+		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;

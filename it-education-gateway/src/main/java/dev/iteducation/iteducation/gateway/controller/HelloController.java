@@ -3,6 +3,7 @@ package dev.iteducation.iteducation.gateway.controller;
 import dev.iteducation.iteducation.gateway.model.UserAccount;
 import dev.iteducation.iteducation.gateway.security.JwtUtils;
 import dev.iteducation.iteducation.gateway.service.UserAccountService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +30,11 @@ public class HelloController {
 	@GetMapping("/hello")
 	@PreAuthorize("hasRole('USER')")
 	public Mono<String> hello(ServerWebExchange exchange) {
-		List<String> authorization = exchange.getRequest().getHeaders().get(jwtUtils.getTokenHeader());
-		return Mono.just("Hello, " + jwtUtils.getUsernameFromToken(authorization.get(0).split(" ")[1]));
+		String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+		if (token == null) {
+			return Mono.just("Unauthorized");
+		}
+		return Mono.just("Hello, " + jwtUtils.getUsernameFromToken(token.substring(7)));
 	}
 
 	@GetMapping("/user")

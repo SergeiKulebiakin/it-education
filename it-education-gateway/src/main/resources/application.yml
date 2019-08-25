@@ -18,7 +18,7 @@ spring:
         - id: static
           uri: http://localhost:3000
           predicates:
-            - Path=/static/**,/
+            - Path=/static/**,/**
 #        - id: webapp
 #          uri: http://localhost:8081
 #          predicates:

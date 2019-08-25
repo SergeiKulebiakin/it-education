@@ -19,8 +19,6 @@ public class JwtUtils implements Serializable {
 
 	private static final long serialVersionUID = -3806616018490690365L;
 
-	private static final String TOKEN_HEADER = "Authorization";
-
 	private final ApplicationConfig applicationConfig;
 
 	public JwtUtils(ApplicationConfig applicationConfig) {
@@ -40,6 +38,10 @@ public class JwtUtils implements Serializable {
 		return getAllClaimsFromToken(token).getSubject();
 	}
 
+	public String getUserIdFromToken(String token) {
+		return getAllClaimsFromToken(token).getId();
+	}
+
 	public Date getExpirationDateFromToken(String token) {
 		return getAllClaimsFromToken(token).getExpiration();
 	}
@@ -52,21 +54,18 @@ public class JwtUtils implements Serializable {
 	public String generateToken(UserAccount user) {
 		var claims = new HashMap<String, Object>();
 		claims.put("role", user.getRoles());
-		return doGenerateToken(claims, user.getUsername());
+		return doGenerateToken(claims, user);
 	}
 
-	public String getTokenHeader() {
-		return TOKEN_HEADER;
-	}
-
-	private String doGenerateToken(Map<String, Object> claims, String username) {
+	private String doGenerateToken(Map<String, Object> claims, UserAccount account) {
 		final var createdDate = new Date();
 		final var expirationTime = applicationConfig.getPassword().getJwt().getExpiration();
 		final var secret = applicationConfig.getPassword().getJwt().getSecret();
 		final var expirationDate = new Date(createdDate.getTime() + expirationTime * 1000);
 		return Jwts.builder()
 				.setClaims(claims)
-				.setSubject(username)
+				.setSubject(account.getUsername())
+				.setId(account.getId())
 				.setIssuedAt(createdDate)
 				.setExpiration(expirationDate)
 				.signWith(SignatureAlgorithm.HS512, Base64.getEncoder().encodeToString(secret.getBytes()))
