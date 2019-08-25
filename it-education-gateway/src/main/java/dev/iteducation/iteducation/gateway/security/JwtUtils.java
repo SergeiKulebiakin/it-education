@@ -1,7 +1,7 @@
 package dev.iteducation.iteducation.gateway.security;
 
 import dev.iteducation.iteducation.gateway.config.ApplicationConfig;
-import dev.iteducation.iteducation.gateway.model.UserAccount;
+import dev.iteducation.iteducation.gateway.domain.document.Account;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -51,20 +51,20 @@ public class JwtUtils implements Serializable {
 		return expiration.before(new Date());
 	}
 
-	public String generateToken(UserAccount user) {
+	public String generateToken(Account user) {
 		var claims = new HashMap<String, Object>();
 		claims.put("role", user.getRoles());
 		return doGenerateToken(claims, user);
 	}
 
-	private String doGenerateToken(Map<String, Object> claims, UserAccount account) {
+	private String doGenerateToken(Map<String, Object> claims, Account account) {
 		final var createdDate = new Date();
 		final var expirationTime = applicationConfig.getPassword().getJwt().getExpiration();
 		final var secret = applicationConfig.getPassword().getJwt().getSecret();
 		final var expirationDate = new Date(createdDate.getTime() + expirationTime * 1000);
 		return Jwts.builder()
 				.setClaims(claims)
-				.setSubject(account.getUsername())
+				.setSubject(account.getUserName())
 				.setId(account.getId())
 				.setIssuedAt(createdDate)
 				.setExpiration(expirationDate)

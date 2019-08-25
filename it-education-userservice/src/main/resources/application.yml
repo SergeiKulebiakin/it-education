@@ -1,0 +1,6 @@
+iteducation:
+  userservice:
+    activation:
+      mailserviceurl: "http://localhost:8086/mailservice"
+      expiration: 3600
+      externalurl: "http://localhost:8080/profile/verification/"

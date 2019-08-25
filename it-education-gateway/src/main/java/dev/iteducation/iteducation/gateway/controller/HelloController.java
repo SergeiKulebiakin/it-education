@@ -1,6 +1,6 @@
 package dev.iteducation.iteducation.gateway.controller;
 
-import dev.iteducation.iteducation.gateway.model.UserAccount;
+import dev.iteducation.iteducation.gateway.domain.document.Account;
 import dev.iteducation.iteducation.gateway.security.JwtUtils;
 import dev.iteducation.iteducation.gateway.service.UserAccountService;
 import org.springframework.http.HttpHeaders;
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @Deprecated
 @RestController
@@ -39,13 +37,13 @@ public class HelloController {
 
 	@GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
-    public Flux<UserAccount> index() {
+    public Flux<Account> index() {
 		return userAccountService.findAll();
     }
 
 	@GetMapping("/admin")
 	@PreAuthorize("hasRole('ADMIN')")
-	public Flux<UserAccount> index2() {
+	public Flux<Account> index2() {
 		return userAccountService.findAll();
 	}
 

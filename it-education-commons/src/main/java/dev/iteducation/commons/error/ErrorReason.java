@@ -10,4 +10,8 @@ public interface ErrorReason {
         return new BusinessException(this.getCode(), String.format(this.getMessageTemplate(), args));
     }
 
+    default BusinessException getException(Throwable throwable, Object... args) {
+        return new BusinessException(this.getCode(), String.format(this.getMessageTemplate(), args));
+    }
+
 }

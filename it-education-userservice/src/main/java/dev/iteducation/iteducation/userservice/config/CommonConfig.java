@@ -2,6 +2,8 @@ package dev.iteducation.iteducation.userservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.iteducation.commons.error.ErrorHandler;
+import dev.iteducation.commons.time.CurrentTime;
+import dev.iteducation.commons.time.CurrentTimeImpl;
 import dev.iteducation.commons.validation.ValidationService;
 import dev.iteducation.commons.validation.ValidationServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -29,4 +31,8 @@ public class CommonConfig {
         return new BCryptPasswordEncoder(8);
     }
 
+    @Bean
+    public CurrentTime currentTime() {
+        return new CurrentTimeImpl();
+    }
 }

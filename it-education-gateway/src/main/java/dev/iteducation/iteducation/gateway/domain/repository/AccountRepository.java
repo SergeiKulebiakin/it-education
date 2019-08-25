@@ -10,6 +10,6 @@ public interface AccountRepository extends ReactiveMongoRepository<Account, Stri
 
     Mono<Account> findByEmail(String email);
 
-    Mono<Account> findByName(String name);
+    Mono<Account> findByUsername(String name);
 
 }

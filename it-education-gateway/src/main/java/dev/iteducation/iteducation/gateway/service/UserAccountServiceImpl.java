@@ -1,7 +1,8 @@
 package dev.iteducation.iteducation.gateway.service;
 
-import dev.iteducation.iteducation.gateway.model.UserAccount;
-import dev.iteducation.iteducation.gateway.model.UserRole;
+import dev.iteducation.iteducation.gateway.domain.document.UserRole;
+import dev.iteducation.iteducation.gateway.domain.repository.AccountRepository;
+import dev.iteducation.iteducation.gateway.domain.document.Account;
 import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,48 +20,54 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	private final PasswordEncoder passwordEncoder;
 
-	private List<UserAccount> users = new ArrayList<>();
+	private final AccountRepository accountRepository;
 
-	{
-		users.add(new UserAccount(
-				"qqqqq2",
-				"user@mail.com",
-				"user",
-				"sykrXtWRaFr21pNn3HMKtBa/MAks9G2OMnVKm/e+II0=",
-				true,
-				List.of(UserRole.ROLE_USER)));
-		users.add(new UserAccount(
-				"qqqqq1",
-				"admin@mail.com",
-				"admin",
-				"sykrXtWRaFr21pNn3HMKtBa/MAks9G2OMnVKm/e+II0=",
-				true,
-				List.of(UserRole.ROLE_USER, UserRole.ROLE_ADMIN)));
-	}
+//	private List<Account> users = new ArrayList<>();
+//
+//	{
+//		users.add(new Account(
+//				"qqqqq2",
+//				"user@mail.com",
+//				"user",
+//				"sykrXtWRaFr21pNn3HMKtBa/MAks9G2OMnVKm/e+II0=",
+//				true,
+//				List.of(UserRole.ROLE_USER)));
+//		users.add(new Account(
+//				"qqqqq1",
+//				"admin@mail.com",
+//				"admin",
+//				"sykrXtWRaFr21pNn3HMKtBa/MAks9G2OMnVKm/e+II0=",
+//				true,
+//				List.of(UserRole.ROLE_USER, UserRole.ROLE_ADMIN)));
+//	}
 
-	public UserAccountServiceImpl(PasswordEncoder passwordEncoder) {
+	public UserAccountServiceImpl(PasswordEncoder passwordEncoder,
+								  AccountRepository accountRepository) {
 		this.passwordEncoder = passwordEncoder;
+		this.accountRepository = accountRepository;
 	}
 
 	@Override
-	public Mono<UserAccount> findByEmail(@NonNull String email) {
-		return Mono.justOrEmpty(users.stream()
-				.filter(user -> email.equalsIgnoreCase(user.getEmail()))
-				.findFirst()
-				.orElse(null));
+	public Mono<Account> findByEmail(@NonNull String email) {
+		return accountRepository.findByEmail(email);
+//		return Mono.justOrEmpty(users.stream()
+//				.filter(user -> email.equalsIgnoreCase(user.getEmail()))
+//				.findFirst()
+//				.orElse(null));
 	}
 
 	@Override
-	public Mono<UserAccount> findByUsername(String username) {
-		return Mono.justOrEmpty(users.stream()
-				.filter(user -> username.equalsIgnoreCase(user.getUsername()))
-				.findFirst()
-				.orElse(null));
+	public Mono<Account> findByUsername(String username) {
+		return accountRepository.findByUsername(username);
+//		return Mono.justOrEmpty(users.stream()
+//				.filter(user -> username.equalsIgnoreCase(user.getUsername()))
+//				.findFirst()
+//				.orElse(null));
 	}
 
 	@Override
-	public Flux<UserAccount> findAll() {
-		return Flux.fromIterable(users);
+	public Flux<Account> findAll() {
+		return accountRepository.findAll();
 	}
 
 	@Override
