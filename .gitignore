@@ -9,6 +9,7 @@
 *.iws
 *.iml
 *.ipr
+*.md
 
 # dependencies
 /it-education-front/node_modules

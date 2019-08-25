@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.account-border {
+  border: 2px solid;
+  border-color: #0f7864;
+}
