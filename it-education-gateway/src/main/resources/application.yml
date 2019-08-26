@@ -18,7 +18,13 @@ spring:
         - id: static
           uri: http://localhost:3000
           predicates:
-            - Path=/static/**,/**
+            - Path=/static/**,/*
+        - id: userservice
+          uri: http://localhost:8082
+          predicates:
+            - Path=/profile/**
+          filters:
+            - RewritePath=/profile/(?<segment>.*), /${segment}
 #        - id: webapp
 #          uri: http://localhost:8081
 #          predicates:

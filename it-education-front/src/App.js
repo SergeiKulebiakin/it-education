@@ -15,7 +15,8 @@ class App extends Component {
 
   state = {
     userId: undefined,
-    userName: undefined
+    userName: undefined,
+    userserviceRoute: "/profile"
   };
 
   constructor(props) {
@@ -69,7 +70,7 @@ class App extends Component {
               <Route exact path='/' component={MainPage}/>
               <Route exact path='/login' render={(props) => <FormLogin {...props} authMethod={this.authenticate} /> } />
               <Route exact path='/about' component={TestArea}/>
-              <Route exact path='/register' component={RegisterForm}/>
+              <Route exact path='/register' render={(props) => <RegisterForm {...props} userService={this.state.userserviceRoute} /> } />
               <Route exact path='/profile' component={Profile}/>
             </Switch>
           </div>

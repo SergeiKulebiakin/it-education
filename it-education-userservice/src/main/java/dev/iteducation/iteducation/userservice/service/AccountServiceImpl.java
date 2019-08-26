@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -63,10 +64,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public Mono<Void> createAccount(@NonNull String email,
-                                       @NonNull String name,
-                                       @NonNull String password,
-                                       @NonNull String confirmPassword) {
+                                    @NonNull String name,
+                                    @NonNull String password,
+                                    @NonNull String confirmPassword) {
 
         if (!password.equals(confirmPassword)) {
             throw UserServiceError.REGISTRATION_FAIL_PASS.getException();
@@ -83,6 +85,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public Mono<Void> verifyAccount(String activationLinkId) {
         return activationLinkRepository.findById(activationLinkId)
                 .switchIfEmpty(Mono.error(UserServiceError.REGISTRATION_FAIL_EXPIRED.getException()))

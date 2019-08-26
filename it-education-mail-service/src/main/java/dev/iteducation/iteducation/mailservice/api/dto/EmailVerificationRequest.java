@@ -20,6 +20,6 @@ public class EmailVerificationRequest {
 	private String email;
 
 	@NotNull
-	private String verificationLink;
+	private String link;
 
 }

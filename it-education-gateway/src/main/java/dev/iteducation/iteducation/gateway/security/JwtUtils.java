@@ -64,7 +64,7 @@ public class JwtUtils implements Serializable {
 		final var expirationDate = new Date(createdDate.getTime() + expirationTime * 1000);
 		return Jwts.builder()
 				.setClaims(claims)
-				.setSubject(account.getUserName())
+				.setSubject(account.getUsername())
 				.setId(account.getId())
 				.setIssuedAt(createdDate)
 				.setExpiration(expirationDate)

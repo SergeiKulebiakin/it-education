@@ -22,7 +22,7 @@ public class TestHandler {
 
 	public Mono<ServerResponse> send(ServerRequest serverRequest) {
 		return serverRequest.bodyToMono(EmailVerificationRequest.class)
-				.flatMap(vr -> emailService.sendEmailVerification(vr.getEmail(), vr.getVerificationLink())
+				.flatMap(vr -> emailService.sendEmailVerification(vr.getEmail(), vr.getLink())
 				.then(ServerResponse.ok().build()));
 	}
 }

@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
 @Configuration
-@EnableReactiveMongoRepositories
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Bean

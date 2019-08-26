@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 
 class LoginForm extends Component {
   render() {
@@ -17,6 +18,8 @@ class LoginForm extends Component {
           </p>
           <button className="btn btn-lg btn-secondary btn-block focus-gray-shadow">Sign in</button>
         </form>
+        <br></br>
+        <Link to="/register"><button className="btn btn-lg btn-secondary btn-block focus-gray-shadow">Register</button></Link>
       </div>
     );
   }

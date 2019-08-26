@@ -1,6 +1,20 @@
+server:
+  port: 8082
+
+spring:
+  data:
+    mongodb:
+      database: iteducation
+      host: 127.0.0.1
+      port: 27017
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+
 iteducation:
   userservice:
     activation:
-      mailserviceurl: "http://localhost:8086/mailservice"
+      mailserviceurl: "http://localhost:8086"
       expiration: 3600
       verificationurl: "http://localhost:8080/profile/verification/"

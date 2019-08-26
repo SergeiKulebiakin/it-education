@@ -6,16 +6,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
-@Configuration
-//@EnableReactiveMongoRepositories
-public class MongoConfig extends AbstractMongoClientConfiguration {
+//@Configuration
+public class MongoConfig { //} extends AbstractMongoClientConfiguration {
 
-    @Override
+//    @Override
     public MongoClient mongoClient() {
         return MongoClients.create();
     }
 
-    @Override
+//    @Override
     protected String getDatabaseName() {
         return "iteducation";
     }

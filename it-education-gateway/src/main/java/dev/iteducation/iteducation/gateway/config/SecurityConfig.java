@@ -36,7 +36,7 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http,
+	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http,
 	                                                      ReactiveAuthenticationManager authenticationManager,
 	                                                      ServerSecurityContextRepository securityContextRepository) {
 		return http
@@ -55,12 +55,15 @@ public class SecurityConfig {
 				.pathMatchers(HttpMethod.OPTIONS).permitAll()
 				.pathMatchers("/auth",
 						"/",
+						"/profile/hello",
 						"/static/**",
 						"/login",
 						"/about",
 						"/mentor",
 						"/articles"
 				).permitAll()
+				.pathMatchers(HttpMethod.POST, "/profile/account").permitAll()
+				.pathMatchers(HttpMethod.POST, "/profile/verification/*").permitAll()
 				.pathMatchers("/actuator").hasRole("ADMIN")
 				.anyExchange().authenticated()
 				.and().build();

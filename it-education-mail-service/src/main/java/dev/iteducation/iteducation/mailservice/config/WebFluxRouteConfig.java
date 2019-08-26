@@ -16,7 +16,7 @@ public class WebFluxRouteConfig {
 	@Bean
 	public RouterFunction<ServerResponse> testRoute(TestHandler testHandler) {
 		return RouterFunctions.route()
-				.GET("/send", testHandler::send)
+				.POST("/verification", testHandler::send)
 				.build();
 	}
 
