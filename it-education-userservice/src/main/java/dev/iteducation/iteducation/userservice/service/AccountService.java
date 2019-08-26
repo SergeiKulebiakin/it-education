@@ -19,9 +19,11 @@ public interface AccountService {
     Flux<Account> findAll();
 
     Mono<Void> createAccount(@NonNull String email,
-                                       @NonNull String name,
-                                       @NonNull String password,
-                                       @NonNull String confirmPassword);
+                             @NonNull String name,
+                             @NonNull String password,
+                             @NonNull String confirmPassword);
+
+    Mono<Void> verifyAccount(@NonNull String activationLinkId);
 
     Mono<Void> deleteAll();
 

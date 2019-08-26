@@ -4,3 +4,6 @@ iteducation:
       mailserviceurl: "http://localhost:8086/mailservice"
       expiration: 3600
       verificationurl: "http://localhost:8080/profile/verification/"
+spring:
+  main:
+    allow-bean-definition-overriding: true

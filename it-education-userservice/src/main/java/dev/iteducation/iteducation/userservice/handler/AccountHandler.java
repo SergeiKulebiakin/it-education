@@ -30,14 +30,13 @@ public class AccountHandler {
 
 
     public Mono<ServerResponse> createAccount(final ServerRequest request) {
-
-        return ServerResponse.status(HttpStatus.CREATED)
-                .body(validationService.extractValidBody(request, AccountCreationRequest.class)
-                        .flatMap(accountCreationRequest -> accountService.createAccount(
-                                accountCreationRequest.getEmail(),
-                                accountCreationRequest.getName(),
-                                accountCreationRequest.getPassword()
-                        ).map(AccountModel::new)), AccountModel.class);
+        return validationService.extractValidBody(request, AccountCreationRequest.class)
+                .flatMap(accountCreationRequest -> accountService.createAccount(
+                        accountCreationRequest.getEmail(),
+                        accountCreationRequest.getName(),
+                        accountCreationRequest.getPassword(),
+                        accountCreationRequest.getConfirmPassword()
+                ).then(ServerResponse.status(HttpStatus.CREATED).build()));
     }
 
     public Mono<ServerResponse> getAccount(final ServerRequest request) {
@@ -46,6 +45,12 @@ public class AccountHandler {
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(accountService.findById(id).map(AccountModel::new), AccountModel.class));
+    }
+
+    public Mono<ServerResponse> verifyAccount(final ServerRequest request) {
+        return validationService.extractPathVariable(request, "linkId")
+                .flatMap(accountService::verifyAccount)
+                .then(ServerResponse.ok().build());
     }
 
     public Mono<ServerResponse> getAll(final ServerRequest request) {

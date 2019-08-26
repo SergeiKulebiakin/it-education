@@ -23,6 +23,7 @@ public class RoutingConfig {
         return RouterFunctions.route()
                 .GET("/account", handler::getAll)
                 .GET("/account/{id}", handler::getAccount)
+                .GET("/verification/{linkId}", handler::verifyAccount)
                 .POST("/account", handler::createAccount)
                 .DELETE("/account", handler::deleteAll)
                 .build();
